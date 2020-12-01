@@ -11,11 +11,11 @@ with open("01-input.txt", "r") as file:
         inputList.append(line)
 #        print("\t"+str(line))
 #   print debugging is *fun*
-        for a, b in twoSumList:
+        for first, second in twoSumList:
 #            print("\t\t" + str(line + a))
 #   print debugging is *really* fun
-            if (line+a == 2020):
-                solution = line*b
+            if (line + first == 2020):
+                solution = line * second
 
 
 print(solution)
