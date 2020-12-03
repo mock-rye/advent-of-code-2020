@@ -1,7 +1,16 @@
 matList = []
-counter = 0
-x = 0
-y = 0
+
+def checkSlope(inMat, horizontal, vertical, width, height):
+    x = 0
+    y = 0
+    counter = 0
+    while x in range(height):
+#        print('\t', x, y)
+        if(inMat[x][y]):
+            counter = counter + 1
+        y = (y + horizontal) % width
+        x = x + vertical
+    return counter
 
 def boolify(char):
     if(char == '#'):
@@ -17,13 +26,6 @@ with open("03-input.txt", "r") as file:
 height = len(matList)
 width = len(matList[0])
 
-print(width, height)
+#print(width, height)
 
-for row in matList:
-#    print(x, y)
-    if(row[y]):
-        counter = counter + 1
-    y = (y + 3) % width
-    x = x + 1
-
-print(counter)
+print(checkSlope(matList, 3, 1, width, height))
