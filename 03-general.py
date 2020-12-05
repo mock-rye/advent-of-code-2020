@@ -1,10 +1,4 @@
-slopeList = [
-    [1, 1],
-    [1, 3],
-    [1, 5],
-    [1, 7],
-    [2, 1]
-]
+matList = []
 
 def checkSlope(inMat, vertical, horizontal, height, width):
     x = 0
@@ -17,8 +11,20 @@ def checkSlope(inMat, vertical, horizontal, height, width):
         x = x + vertical
     return counter
 
-def solve(inList, slopeList):
+def part1(inList):
+    height = len(inList)
+    width = len(inList[0])
+    return checkSlope(inList, 1, 3, height, width)
+
+def part2(inList):
     result = 1
+    slopeList = [
+        [1, 1],
+        [1, 3],
+        [1, 5],
+        [1, 7],
+        [2, 1]
+    ]
     height = len(inList)
     width = len(inList[0])
     for hor, ver in slopeList:
@@ -32,9 +38,12 @@ def boolify(char):
         return False
 
 with open("03-input.txt", "r") as file:
-    matList = []
     for line in file:
         boolLine = [boolify(char) for char in line.strip()]
         matList.append(boolLine)
 
-print(solve(matList, slopeList))
+height = len(matList)
+width = len(matList[0])
+
+print(part1(matList))
+print(part2(matList))
