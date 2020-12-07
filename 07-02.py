@@ -1,23 +1,28 @@
 import re
 tree = dict()
 
+class child:
+    def __init__(self, quantity, name):
+        self.quantity = quantity
+        self.name = name
+    
+
 def checkFromNode(tree, node):
-    if not tree[node]:
+    children = tree[node]
+    if not children:
         result = 1
     else:
-        result = sum([n[0]*checkFromNode(tree, n[1]) for n in tree[node]]) + 1
+        result = sum([child.quantity * checkFromNode(tree, child.name) for child in children]) + 1
     return result
 
 with open("07-input.txt", "r") as file:
     for line in file:
-        line = [bit.strip() for bit in line.split('bags contain')]
-        contents = [elem.replace('.','') for elem in line[1].split(', ')]
-        contents = [elem.replace('bags','').replace('bag','') for elem in contents]
-        if contents[0].strip() == "no other":
+        line = [elem.strip() for elem in line.split('bags contain')]
+        contents = [re.sub(r' *bag(s?) *|[.]','',elem) for elem in line[1].split(',')]
+        if contents[0] == "no other":
             contents = False
         else:
-            contents = [[int(re.findall(r'\d+', elem)[0]), re.sub(r'\d+', '', elem)] for elem in contents]
-            contents = [[elem[0], elem[1].strip()] for elem in contents]
+            contents = [child(int(re.findall(r'\d+', elem)[0]), re.sub(r'\d+', '', elem).strip()) for elem in contents]
         container = line[0]
         tree[container] = contents
 ##        print(container, contents)
