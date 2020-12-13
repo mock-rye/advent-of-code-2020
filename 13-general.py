@@ -4,7 +4,6 @@ def part1(startTime, busses):
     mnWait = min(waitTimes)
     shortBus = busses[waitTimes.index(mnWait)]
     return mnWait * shortBus
-    
 
 def part2(busses, columns):
     # uses modular multiplication iteratively
